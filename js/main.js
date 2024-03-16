@@ -8,13 +8,21 @@ import "../sass/style.scss";
   API key:  IjABpDeNJxW78UJ5ELFBQvzQLLATuCvG6reLDzTSaELPMhgQd3dJ26Gp
 ***************************************************************/
 
+// TODO
+// ローディング追加。無理矢理でも入れてみる
+// inputを入れないでクリックした時の処理
+// 画像が見つからない時の処理
+
+
 // PexelsのApi key
-const auth = "IjABpDeNJxW78UJ5ELFBQvzQLLATuCvG6reLDzTSaELPMhgQd3dJ26Gp";
+// → 変数名の最初はVITEとする。これでviteが読み込む
+const auth = import.meta.env.VITE_PIXELS_API_KEY;
 
 const gallery = document.getElementById("js-gallery");
 const searchInput = document.getElementById("js-searchInput");
 const form = document.getElementById("js-form");
 const moreBtn = document.getElementById("js-moreBtn");
+const clearBtn = document.getElementById("js-clearBtn");
 
 let searchValue;
 
@@ -40,9 +48,11 @@ form.addEventListener("submit", (e) => {
 // moreボタンクリック
 moreBtn.addEventListener("click", loadMore)
 
+// クリアボタン
+clearBtn.addEventListener("click", clearImg)
+
 
 // Functions
-
 // moreボタンクリック → 画像ロードする処理
 async function loadMore() {
   try {
@@ -64,7 +74,6 @@ async function loadMore() {
   }
 }
 
-
 // inputの値を取得
 function updateInput(e) {
   // console.log(e); // InputEvent {isTrusted: true, data: 'd', isComposing: false, inputType: 'insertText', dataTransfer: null, …}
@@ -74,7 +83,7 @@ function updateInput(e) {
 }
 
 // inputの値をクリア
-function clearInput(e){
+function clearInput(){ 
   searchInput.value = ""
 }
 
@@ -91,9 +100,7 @@ function clear(){
 
 // 画像取得のapiを叩く処理
 async function fetchApi(url){
-  const dataFetch = await fetch(
-    url,
-    {
+  const dataFetch = await fetch(url, {
       method: "GET",
       headers: {
         // クライアントが受け入れるレスポンスの形式を指定。
@@ -105,7 +112,6 @@ async function fetchApi(url){
 
   const data = await dataFetch.json();
   // console.log(data) // {page: 1, per_page: 15, photos: Array(15), total_results: 8000, next_page: 'https://api.pexels.com/v1/curated/?page=2&per_page=15'}
-  
   return data;
 }
 
@@ -143,7 +149,7 @@ async function curatedPhotos() {
     fetchLink = "https://api.pexels.com/v1/curated?per_page=15&page=1";
 
     const data = await fetchApi(fetchLink); // 画像取得
-    generatePictures(data);  // 画像を挿入
+    generatePictures(data);  // 画像挿入
 
   } catch (error) {
     console.error("Don't Fetch Images!!", error);
@@ -160,7 +166,7 @@ async function searchPhotos(query) { // inputから値を取得
     // 画像取得
     const data = await fetchApi(fetchLink)
 
-    generatePictures(data); // 画像を挿入
+    generatePictures(data); // 画像挿入
 
   } catch (error) {
     console.error("Don't search photos!!", error);

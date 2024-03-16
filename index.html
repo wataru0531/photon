@@ -8,31 +8,42 @@
     <meta name="description" content="Photon" />
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
-    
     <script type="module" defer src="./js/main.js"></script>
   </head>
   <body>
-
     <header class="header">
       <h2>
         <a class="logo" id="logo" href="./index.html">Photon</a>
       </h2>
-      <form class="search-form" id="js-form" action="">
-        <input class="search-input" id="js-searchInput" type="text" name="search">
-        <!-- formにonsubmitの処理があれば、buttonにtype="submit"の機能を付与しなくてもいい -->
-        <!-- ボタンクリック → バブリングにより子要素から親要素にクリックが伝播してformが動作する -->
-        <!-- 
-          ・エンターキーによるフォームの送信は、ブラウザのデフォルトの動作による仕様。
-          ・ボタンクリックによるフォームの送信は、そのクリックイベントはボタン要素から始まり、
-            その後親要素にイベントが伝播するというメカニズムは、イベントバブリングによるもの。
-        -->
-        <button class="submit-btn" id="js-submitButton">Search</button>
-      </form>
-      
+
+      <div class="form-block">
+        <form class="search-form" id="js-form" action="">
+          <input
+            class="search-input"
+            id="js-searchInput"
+            type="text"
+            name="search"
+          />
+          <!-- formにonsubmitの処理があれば、buttonにtype="submit"の機能を付与しなくてもいい -->
+          <!-- ボタンクリック → バブリングにより子要素から親要素にクリックが伝播してformが動作する -->
+          <!-- 
+            ・エンターキーによるフォームの送信は、ブラウザのデフォルトの動作による仕様。
+            ・ボタンクリックによるフォームの送信は、そのクリックイベントはボタン要素から始まり、
+              その後親要素にイベントが伝播するというメカニズムは、イベントバブリングによるもの。
+          -->
+          <button class="submit-btn" id="js-submitBtn">Search</button>
+        </form>
+        <div class="clear-btn-wrapper">
+          <button class="clear-btn" id="js-clearBtn">Clear</button>
+        </div>
+      </div>
     </header>
 
     <main>
@@ -44,8 +55,6 @@
     <div class="nav-button">
       <button class="more" id="js-moreBtn">More</button>
     </div>
-
-    
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script> -->
   </body>
